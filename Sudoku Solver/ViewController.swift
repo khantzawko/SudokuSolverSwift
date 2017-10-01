@@ -25,23 +25,19 @@ class ViewController: UIViewController {
             let row = temp[0]
             let col = temp[1]
             
-            for var i = 1; i <= MAXNUM; i++ {
+            for i in 1...MAXNUM {
                 
                 if isSafe(row, col: col, num: i) {
-                    
                     grid[row][col] = i
                     
                     if solveSudoku() {
-                        
                         return true
                     }
-                    
                     grid[row][col] = UNASSIGNED
                 }
             }
-            
+
         } else {
-            
             return true
         }
         
@@ -51,26 +47,18 @@ class ViewController: UIViewController {
     func findUnassignedLocation() -> [Int] {
         
         var temp = [Int]()
-        
-        for var row = 0; row < grid.count; row++ {
-            
-            for var col = 0; col < grid.count; col++ {
-                
+        for row in 0 ..< grid.count {
+            for col in 0 ..< grid.count {
                 if grid[row][col] == 0 {
-                    
                     temp = [row,col]
-                    
                     return temp
                 }
-
             }
-
         }
-        
         return temp
     }
     
-    func isSafe(row:Int, col:Int, num:Int) -> Bool {
+    func isSafe(_ row:Int, col:Int, num:Int) -> Bool {
         
         return checkRow(row, col: col, num: num)
             && checkCol(row, col: col, num: num)
@@ -78,57 +66,46 @@ class ViewController: UIViewController {
 
     }
     
-    func checkRow(row: Int, col: Int, num: Int) -> Bool {
+    func checkRow(_ row: Int, col: Int, num: Int) -> Bool {
         
-        for var i = 0; i < grid.count; i++ {
-            
+        for i in 0 ..< grid.count {
             if (grid[row][i] == num) {
-                
                 return false
             }
-
         }
-        
         return true
     }
     
-    func checkCol(row: Int, col: Int, num: Int) -> Bool {
+    func checkCol(_ row: Int, col: Int, num: Int) -> Bool {
         
-        for var i = 0; i < grid.count; i++ {
-            
+        for i in 0 ..< grid.count {
             if (grid[i][col] == num) {
-                
                 return false
             }
-            
         }
-        
         return true
     }
     
-    func checkGrid(var row: Int, var col: Int, num: Int) -> Bool {
+    func checkGrid(_ row: Int, col: Int, num: Int) -> Bool {
+        var row = row, col = col
         
         row = row - (row % SQN)
         col = col - (col % SQN)
 
-        for var i = 0; i < SQN; i++ {
-            
-            for var j = 0; j < SQN; j++ {
-                
+        for i in 0 ..< SQN {
+            for j in 0 ..< SQN {
                 if grid[i + row][j + col] == num {
-                    
                     return false
                 }
             }
         }
-        
         return true
     }
 
     
     func printGrid()->() {
         
-        for var row = 0; row < grid.count; row++ {
+        for row in 0 ..< grid.count {
             
             print("\(grid[row])")
             
@@ -140,15 +117,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        grid = [[3, 0, 6, 5, 0, 8, 4, 0, 0],
-                [5, 2, 0, 0, 0, 0, 0, 0, 0],
-                [0, 8, 7, 0, 0, 0, 0, 3, 1],
-                [0, 0, 3, 0, 1, 0, 0, 8, 0],
-                [9, 0, 0, 8, 6, 3, 0, 0, 5],
-                [0, 5, 0, 0, 9, 0, 6, 0, 0],
-                [1, 3, 0, 0, 0, 0, 2, 5, 0],
-                [0, 0, 0, 0, 0, 0, 0, 7, 4],
-                [0, 0, 5, 2, 0, 6, 3, 0, 0]]
+        grid = [[5, 6, 0, 0, 0, 1, 0, 7, 0],
+                [0, 0, 8, 0, 0, 2, 0, 0, 0],
+                [0, 1, 0, 8, 6, 0, 0, 0, 9],
+                [0, 0, 0, 9, 0, 0, 0, 0, 1],
+                [1, 0, 5, 0, 0, 0, 0, 0, 0],
+                [0, 4, 0, 0, 8, 0, 0, 5, 6],
+                [0, 0, 2, 0, 0, 0, 0, 8, 0],
+                [8, 7, 0, 0, 0, 0, 0, 0, 0],
+                [6, 0, 1, 0, 0, 0, 0, 0, 5]]
         
         print("unsolved sudoku");
         

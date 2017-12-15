@@ -36,11 +36,9 @@ class ViewController: UIViewController {
                     grid[row][col] = UNASSIGNED
                 }
             }
-
         } else {
             return true
         }
-        
         return false
     }
     
@@ -63,7 +61,6 @@ class ViewController: UIViewController {
         return checkRow(row, col: col, num: num)
             && checkCol(row, col: col, num: num)
             && checkGrid(row, col: col, num: num)
-
     }
     
     func checkRow(_ row: Int, col: Int, num: Int) -> Bool {
@@ -101,18 +98,12 @@ class ViewController: UIViewController {
         }
         return true
     }
-
     
     func printGrid()->() {
-        
         for row in 0 ..< grid.count {
-            
             print("\(grid[row])")
-            
         }
- 
     }
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,17 +119,12 @@ class ViewController: UIViewController {
                 [6, 0, 1, 0, 0, 0, 0, 0, 5]]
         
         print("unsolved sudoku");
-        
         printGrid()
         
         if solveSudoku() == true {
-            
             print("\n" + "solved sudoku");
-            
             printGrid()
-            
         } else {
-            
             print("The data you give me is wrong!")
         }
     }
